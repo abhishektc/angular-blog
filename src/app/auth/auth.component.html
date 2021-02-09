@@ -1,0 +1,49 @@
+<div class="container">
+    <mat-card class="card">
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+            <div class="inputForm">
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>Enter username</mat-label>
+                    <input matInput type="text" name="username" formControlName="username">
+                </mat-form-field>
+                <div
+                    *ngIf="userForm.controls.username.errors && (userForm.controls.username.touched || userForm.controls.username.dirty)">
+                    <mat-error class="error" *ngIf="userForm.hasError('required','username')">
+                        Username is <strong>required</strong>
+                    </mat-error>
+                    <mat-error class="error" *ngIf="userForm.hasError('pattern','username')">
+                        Username only contains(number & character) <strong>required</strong>
+                    </mat-error>
+                    <mat-error class="error" *ngIf="userForm.hasError('minlength','username') || userForm.hasError('maxlength','username')">
+                        Username must be 4 to 18 character long.
+                    </mat-error>
+                </div>
+            </div>
+            <div class="inputForm">
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>Enter password</mat-label>
+                    <input matInput [type]="hide ? 'password' : 'text'" name="password" formControlName="password">
+                    <button type="button" (click)="hide = !hide" mat-icon-button matSuffix [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
+                <div style="font-size: 12px;"
+                    *ngIf="userForm.controls.password.errors && (userForm.controls.password.touched || userForm.controls.password.dirty)">
+                    <mat-error class="error" *ngIf="userForm.hasError('required','password')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                    <mat-error class="error" *ngIf="userForm.hasError('minlength','password') || userForm.hasError('maxlength','password')">
+                        Password must 6 to 16 character long.
+                    </mat-error>
+                </div>
+            </div>
+            <mat-spinner  *ngIf="isLoading"></mat-spinner>
+            <button *ngIf="!isLoading" mat-raised-button [disabled]="!userForm.valid" type="submit" color="primary">{{loginMode? 'Login' :
+                'Sign Up'}}</button>
+            <br>
+            <button *ngIf="!isLoading" type="button" mat-button (click)="onSwitchMode()">Switch to {{loginMode? 'Sign Up' : 'Login'}}</button>
+
+        </form>
+    </mat-card>
+</div>

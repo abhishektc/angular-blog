@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="blogList">
+    <mat-spinner  *ngIf="isLoading"></mat-spinner>
+  </div>
+  <div  *ngIf="!isLoading">
+    <div *ngFor="let blog of blogs">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar
+            style="background-color: rgb(194, 95, 95); display: flex;justify-content: center;align-items: center;"
+            class="example-header-image">{{blog.title.charAt(0) | uppercase}}</div>
+          <mat-card-title>{{blog.title | titlecase}}</mat-card-title>
+          <mat-card-subtitle>@{{blog.username}} {{blog.updatedate | date: 'MMM d, y, h:mm:ss a'}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            {{blog.content}}
+          </p>
+        </mat-card-content>
+      </mat-card>
+      <br>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+mat-toolbar {
+    background-color: #476079;
+    padding: 0 5%;
+}
+
+.title{
+    color: rgb(221, 116, 116);
+    font-weight: bold;
+}
+
+.title:hover {
+    cursor: pointer;
+}
+
+.tab {
+    background-color: #476079;
+    /* padding: 0 14px; */
+}
+
+.tab:hover {
+    cursor: pointer;
+    background-color: #2166aa;
+}
+
+.active {
+    background-color: #2166aa;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+@media only screen and (max-width: 500px){
+    .tab {
+        padding: 0 5px;
+    }
+
+    .title{
+        font-size: 17px;
+    }
+}

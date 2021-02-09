@@ -1,0 +1,18 @@
+<mat-toolbar>
+  <span class="title">Shipthis Blog</span>
+  <span class="example-spacer"></span>
+  <button title="Home" [routerLink]="['/blogs']" routerLinkActive="active" mat-icon-button class="tab">
+    <mat-icon>home</mat-icon>
+  </button>
+  <button title="My Blog" [routerLink]="['/myBlog']" routerLinkActive="active" mat-icon-button class="tab">
+    <mat-icon>book</mat-icon>
+  </button>
+  <button *ngIf="isAuthenticated" title="Logout" routerLinkActive="active" (click)="logout()" mat-icon-button
+    class="tab">
+    <mat-icon>logout</mat-icon>
+  </button>
+  <button [routerLink]="['/auth']" *ngIf="!isAuthenticated" routerLinkActive="active" title="Login" mat-icon-button
+    class="tab">
+    <mat-icon>login</mat-icon>
+  </button>
+</mat-toolbar>

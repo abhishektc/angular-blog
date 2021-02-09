@@ -1,0 +1,24 @@
+<div class="main">
+    <div class="blogList">
+        <mat-spinner *ngIf="isLoading"></mat-spinner>
+    </div>
+    <div *ngIf="!isLoading">
+        <h2 mat-dialog-title>Edit blog</h2>
+        <mat-dialog-content class="mat-typography">
+            <form [formGroup]="editForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+                <mat-form-field class="input" appearance="fill">
+                    <mat-label>Enter title</mat-label>
+                    <input matInput type="text" name="title" formControlName="title">
+                </mat-form-field>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Enter content</mat-label>
+                    <textarea matInput name="content" formControlName="content"></textarea>
+                </mat-form-field>
+                <button mat-raised-button [disabled]="!editForm.valid" type="submit" color="primary">Update</button>
+            </form>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button mat-button mat-dialog-close>Cancel</button>
+        </mat-dialog-actions>
+    </div>
+</div>

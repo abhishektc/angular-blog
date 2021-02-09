@@ -1,0 +1,12 @@
+.input{
+    width: 100%;
+}
+
+.example-full-width{
+    width: 100%;
+}
+
+.blogList{
+    display: flex;
+    justify-content: center;
+}
