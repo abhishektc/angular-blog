@@ -1,6 +1,6 @@
 <div class="container">
-  <div class="blogList">
-    <mat-spinner  *ngIf="isLoading"></mat-spinner>
+  <div *ngIf="isLoading" class="blogList">
+    <mat-spinner></mat-spinner>
   </div>
   <div  *ngIf="!isLoading">
     <div *ngFor="let blog of blogs">

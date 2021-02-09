@@ -3,10 +3,10 @@
   <span class="example-spacer"></span>
   <button title="Home" [routerLink]="['/blogs']" routerLinkActive="active" mat-icon-button class="tab">
     <mat-icon>home</mat-icon>
-  </button>
+  </button>&nbsp;
   <button title="My Blog" [routerLink]="['/myBlog']" routerLinkActive="active" mat-icon-button class="tab">
     <mat-icon>book</mat-icon>
-  </button>
+  </button>&nbsp;
   <button *ngIf="isAuthenticated" title="Logout" routerLinkActive="active" (click)="logout()" mat-icon-button
     class="tab">
     <mat-icon>logout</mat-icon>

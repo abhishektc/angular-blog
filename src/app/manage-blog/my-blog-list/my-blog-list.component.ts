@@ -21,7 +21,9 @@ export interface DialogData {
 
 export class MyBlogListComponent implements OnInit {
   isLoading = true;
+  isLoadingDelete = false;
   blogs = [];
+  blogDelete: any;
   constructor(public dialog: MatDialog, private bolgService: BlogsService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class MyBlogListComponent implements OnInit {
 
   getMyBlogList() {
     this.isLoading = true;
+
     const userData: {
       tokenData: any;
     } = JSON.parse(localStorage.getItem('userData'));
@@ -51,8 +54,6 @@ export class MyBlogListComponent implements OnInit {
         }
       );
     }
-    this.isLoading = false;
-
   }
 
   openPostDialog() {
@@ -81,6 +82,8 @@ export class MyBlogListComponent implements OnInit {
   }
 
   deletePost(id: any) {
+    this.isLoadingDelete = true;
+    this.blogDelete = id;
     const userData: {
       tokenData: any;
     } = JSON.parse(localStorage.getItem('userData'));
@@ -88,10 +91,12 @@ export class MyBlogListComponent implements OnInit {
     if (confirm("Are you sure to delete this blog.")) {
       this.bolgService.deleteBlogById(id, userData.tokenData).subscribe(
         data => {
+          this.isLoadingDelete = false;
           this.openSnackBar('Deleted blog successfully.');
           this.getMyBlogList();
         },
         err => {
+          this.isLoadingDelete = false;
           this.openSnackBar(err);
         }
       );
