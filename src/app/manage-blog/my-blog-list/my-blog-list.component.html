@@ -25,9 +25,11 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <mat-spinner *ngIf="isLoadingDelete && blogDelete === blog.blogid"></mat-spinner>
-          <button *ngIf="!isLoadingDelete" mat-button (click)="openEditDialog(blog.blogid, blog.title, blog.content)">EDIT</button>
-          <button *ngIf="!isLoadingDelete" mat-button (click)="deletePost(blog.blogid)">DELETE</button>
+          <mat-spinner  mode="indeterminate" style="margin:0 auto;" [diameter]="30" *ngIf="isLoadingDelete && blogDelete === blog.blogid"></mat-spinner>
+          <button *ngIf="!(isLoadingDelete && blogDelete === blog.blogid)" mat-button
+            (click)="openEditDialog(blog.blogid, blog.title, blog.content)">EDIT</button>
+          <button *ngIf="!(isLoadingDelete && blogDelete == blog.blogid)" mat-button
+            (click)="deletePost(blog.blogid)">DELETE</button>
         </mat-card-actions>
       </mat-card>
       <br>

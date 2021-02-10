@@ -2,7 +2,7 @@
   <div *ngIf="isLoading" class="blogList">
     <mat-spinner></mat-spinner>
   </div>
-  <div  *ngIf="!isLoading">
+  <div *ngIf="!isLoading">
     <div *ngFor="let blog of blogs">
       <mat-card class="example-card">
         <mat-card-header>

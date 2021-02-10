@@ -64,9 +64,9 @@ export class MyBlogListComponent implements OnInit {
   }
 
   openEditDialog(id: any, title: any, content: any) {
-    
+
     const dialogRef = this.dialog.open(EditBlog, {
-      data: {blogId: id, title: title, content: content}
+      data: { blogId: id, title: title, content: content }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -82,13 +82,13 @@ export class MyBlogListComponent implements OnInit {
   }
 
   deletePost(id: any) {
-    this.isLoadingDelete = true;
-    this.blogDelete = id;
     const userData: {
       tokenData: any;
     } = JSON.parse(localStorage.getItem('userData'));
 
     if (confirm("Are you sure to delete this blog.")) {
+      this.blogDelete = id;
+      this.isLoadingDelete = true;
       this.bolgService.deleteBlogById(id, userData.tokenData).subscribe(
         data => {
           this.isLoadingDelete = false;
@@ -101,7 +101,7 @@ export class MyBlogListComponent implements OnInit {
         }
       );
     }
-    
+
   }
 
 }
@@ -171,7 +171,7 @@ export class CreatePostDialog {
 export class EditBlog {
   isLoading = false;
 
-  constructor(public dialogRef: MatDialogRef<EditBlog>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private fb: FormBuilder, private _snackBar: MatSnackBar, private blogService:BlogsService) { }
+  constructor(public dialogRef: MatDialogRef<EditBlog>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private fb: FormBuilder, private _snackBar: MatSnackBar, private blogService: BlogsService) { }
 
   editForm = this.fb.group({
     title: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(100)]),
@@ -182,7 +182,7 @@ export class EditBlog {
     this.editForm.patchValue({
       title: this.data.title,
       content: this.data.content
-    });    
+    });
   }
 
   onSubmit() {
@@ -190,14 +190,14 @@ export class EditBlog {
     this.isLoading = true;
     const title = this.editForm.get('title').value;
     const content = this.editForm.get('content').value;
-    
+
     const userData: {
       tokenData: any;
     } = JSON.parse(localStorage.getItem('userData'));
 
     if (!!userData) {
       this.blogService.updateBlogById(this.data.blogId, title, content, userData.tokenData).subscribe(
-        data => {          
+        data => {
           this.openSnackBar('Updated blog successfully.')
           this.isLoading = false;
           this.onClose();

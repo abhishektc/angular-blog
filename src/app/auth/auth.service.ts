@@ -19,7 +19,8 @@ const API = 'https://blog-server-nodejs.herokuapp.com/api/auth';
 })
 
 export class AuthService {
-  userInfo:  {
+  
+  userInfo: {
     userId: string;
     username: string;
     tokenData: string;
@@ -28,14 +29,14 @@ export class AuthService {
 
   user = new BehaviorSubject<any>(!!this.userInfo ? this.userInfo : null);
   private tokenExpirationTimer: any;
-  
-  constructor(private http:HttpClient, private router:Router) { 
+
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   signup(username: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        API+'/signup',
+        API + '/signup',
         {
           username: username,
           password: password,
@@ -57,7 +58,7 @@ export class AuthService {
   login(username: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        API+'/login',
+        API + '/login',
         {
           username: username,
           password: password,
@@ -65,7 +66,7 @@ export class AuthService {
       )
       .pipe(
         catchError(this.handleError),
-        tap(resData => {          
+        tap(resData => {
           this.handleAuthentication(
             resData.userId,
             resData.username,
@@ -103,10 +104,10 @@ export class AuthService {
     }
   }
 
-  logout() {    
+  logout() {
     this.user.next(null);
     localStorage.removeItem('userData');
-    
+
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
     }
@@ -126,20 +127,20 @@ export class AuthService {
     token: string,
     expiresIn: number
   ) {
-    
+
     const expirationDate = new Date(expiresIn * 1000);
-    
+
     const user = new User(userId, username, token, expirationDate);
-    
+
     this.user.next(user);
-    
+
     this.autoLogout(expiresIn * 1000 - new Date().getTime());
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
-  private handleError(errorRes: HttpErrorResponse) {    
+  private handleError(errorRes: HttpErrorResponse) {
     let errorMessage = 'An unknown error occurred!';
-    
+
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);
     }

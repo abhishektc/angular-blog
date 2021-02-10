@@ -25,7 +25,7 @@ export class BlogComponent implements OnInit {
         let data = AuthResponseData
         this.blogs = data.data;
         this.isLoading = false;
-                
+
         if (data.data.length <= 0) {
           this.openSnackBar('Blogs list not available. Please Refresh')
         }

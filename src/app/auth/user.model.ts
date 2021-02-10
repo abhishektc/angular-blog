@@ -4,7 +4,7 @@ export class User {
     public username: string,
     private tokenData: string,
     private expirationDate: Date
-  ) {}
+  ) { }
 
   get token() {
     if (!this.expirationDate || new Date() > this.expirationDate) {
@@ -13,4 +13,3 @@ export class User {
     return this.tokenData;
   }
 }
-  
